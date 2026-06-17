@@ -17,6 +17,7 @@ const scoreElement = document.getElementById("score");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
 const gameOverElement = document.getElementById("game-over");
+const touchButtons = document.querySelectorAll(".touch-btn");
 
 // 테트로미노 블록 정의 (I, O, T, S, Z, J, L)
 const PIECES = {
@@ -378,10 +379,48 @@ function updateScore() {
 function updateButtons() {
   startBtn.disabled = isPlaying;
   restartBtn.disabled = !isPlaying && !isGameOver;
+  updateTouchControls();
+}
+
+function updateTouchControls() {
+  const enabled = isPlaying && !!currentPiece;
+
+  touchButtons.forEach((button) => {
+    button.disabled = !enabled;
+  });
 }
 
 function updateGameOverUI() {
   gameOverElement.hidden = !isGameOver;
+}
+
+// 게임 조작 (키보드·터치 공통)
+function performAction(action) {
+  if (!isPlaying || !currentPiece) return;
+
+  let shouldRender = false;
+
+  switch (action) {
+    case "left":
+      shouldRender = tryMovePiece(-1, 0);
+      break;
+    case "right":
+      shouldRender = tryMovePiece(1, 0);
+      break;
+    case "down":
+      shouldRender = tryMovePiece(0, 1);
+      break;
+    case "rotate":
+      shouldRender = tryRotatePiece();
+      break;
+    case "drop":
+      hardDrop();
+      return;
+  }
+
+  if (shouldRender) {
+    renderBoard();
+  }
 }
 
 // --- 이벤트 ---
@@ -406,29 +445,23 @@ function handleKeyDown(event) {
 
   event.preventDefault();
 
-  let shouldRender = false;
+  const keyActionMap = {
+    ArrowLeft: "left",
+    ArrowRight: "right",
+    ArrowDown: "down",
+    ArrowUp: "rotate",
+    Space: "drop",
+  };
 
-  switch (event.code) {
-    case "ArrowLeft":
-      shouldRender = tryMovePiece(-1, 0);
-      break;
-    case "ArrowRight":
-      shouldRender = tryMovePiece(1, 0);
-      break;
-    case "ArrowDown":
-      shouldRender = tryMovePiece(0, 1);
-      break;
-    case "ArrowUp":
-      shouldRender = tryRotatePiece();
-      break;
-    case "Space":
-      hardDrop();
-      return;
-  }
+  performAction(keyActionMap[event.code]);
+}
 
-  if (shouldRender) {
-    renderBoard();
-  }
+function handleTouchControl(event) {
+  const button = event.target.closest("[data-action]");
+  if (!button || button.disabled) return;
+
+  event.preventDefault();
+  performAction(button.dataset.action);
 }
 
 function init() {
@@ -440,6 +473,9 @@ function init() {
   startBtn.addEventListener("click", handleStart);
   restartBtn.addEventListener("click", handleRestart);
   document.addEventListener("keydown", handleKeyDown);
+
+  const touchControls = document.querySelector(".touch-controls");
+  touchControls.addEventListener("pointerdown", handleTouchControl);
 }
 
 init();
