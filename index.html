@@ -29,17 +29,30 @@
           <button id="restart-btn" type="button" disabled>재시작</button>
         </div>
 
-        <div class="controls-panel">
-          <h2>조작법</h2>
+        <div class="controls-panel controls-desktop">
+          <h2>조작법 (키보드)</h2>
           <ul class="controls-list">
-            <li><kbd>←</kbd> ArrowLeft — 왼쪽 이동</li>
-            <li><kbd>→</kbd> ArrowRight — 오른쪽 이동</li>
-            <li><kbd>↓</kbd> ArrowDown — 한 칸 빠르게 내리기</li>
-            <li><kbd>↑</kbd> ArrowUp — 블록 회전</li>
-            <li><kbd>Space</kbd> — 즉시 낙하 (hard drop)</li>
+            <li><kbd>←</kbd> <kbd>→</kbd> 좌우 이동</li>
+            <li><kbd>↓</kbd> 빠르게 내리기</li>
+            <li><kbd>↑</kbd> 블록 회전</li>
+            <li><kbd>Space</kbd> 즉시 낙하</li>
           </ul>
         </div>
       </aside>
+    </div>
+
+    <!-- 모바일 터치 조작 -->
+    <div class="touch-controls" aria-label="터치 조작">
+      <div class="touch-row">
+        <button type="button" class="touch-btn" data-action="left" aria-label="왼쪽">←</button>
+        <button type="button" class="touch-btn touch-btn-rotate" data-action="rotate" aria-label="회전">↻</button>
+        <button type="button" class="touch-btn" data-action="right" aria-label="오른쪽">→</button>
+      </div>
+      <div class="touch-row">
+        <button type="button" class="touch-btn touch-btn-down" data-action="down" aria-label="아래">↓</button>
+        <button type="button" class="touch-btn touch-btn-drop" data-action="drop" aria-label="즉시 낙하">낙하</button>
+      </div>
+      <p class="touch-hint">화면 버튼으로 블록을 조작하세요</p>
     </div>
   </main>
 
