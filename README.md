@@ -53,10 +53,11 @@ tetris-cursor/
 - 게임 보드, 점수, 시작/재시작 버튼, 조작법 안내 UI
 - 블록 생성·자동 낙하·고정·키보드 조작
 - 줄 삭제·점수 산정·게임 오버·재시작
+- 모바일 반응형 레이아웃 (세로 배치·화면 맞춤 보드)
 
-## GitHub Pages 배포 (선택)
+## GitHub Pages 배포
 
-저장소를 GitHub에 올린 뒤 Pages를 활성화하면 아래 주소로 접속할 수 있습니다.
+아래 주소에서 플레이할 수 있습니다.
 
 ```
 https://ksmphskmk-maker.github.io/tetris-cursor/
