@@ -246,7 +246,7 @@ kbd {
   }
 }
 
-/* 좁은 화면 가로 모드 */
+/* 좁은 화면(가로 합계 초과) — 보드·패널 가로 배치 시에도 맞춤 */
 @media (max-width: 640px) and (orientation: landscape) {
   :root {
     --cell-size: min(
