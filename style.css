@@ -1,0 +1,184 @@
+/* 기본 레이아웃 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+}
+
+.game-container {
+  padding: 24px;
+}
+
+.title {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.game-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* 게임 보드 */
+.board-section {
+  position: relative;
+  padding: 8px;
+  background: #16213e;
+  border: 3px solid #0f3460;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.game-over {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.game-over[hidden] {
+  display: none;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  gap: 1px;
+  background: #1a1a2e;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background: #0a0a14;
+  border: 1px solid #1a1a2e;
+}
+
+.cell.filled {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 테트로미노 색상 */
+.cell.piece-I { background: #00f0f0; }
+.cell.piece-O { background: #f0f000; }
+.cell.piece-T { background: #a000f0; }
+.cell.piece-S { background: #00f000; }
+.cell.piece-Z { background: #f00000; }
+.cell.piece-J { background: #0000f0; }
+.cell.piece-L { background: #f0a000; }
+
+/* 정보 패널 */
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 180px;
+}
+
+.score-panel h2,
+.controls-panel h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.score-value {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #e94560;
+}
+
+/* 시작 / 재시작 버튼 */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#start-btn,
+#restart-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+#start-btn {
+  background: #e94560;
+}
+
+#start-btn:hover:not(:disabled) {
+  background: #ff6b6b;
+}
+
+#restart-btn {
+  background: #533483;
+}
+
+#restart-btn:hover:not(:disabled) {
+  background: #6b44a8;
+}
+
+#start-btn:active:not(:disabled),
+#restart-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+#start-btn:disabled,
+#restart-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 조작법 안내 */
+.controls-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.controls-list li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 0.85em;
+  background: #0f3460;
+  border: 1px solid #533483;
+  border-radius: 3px;
+}
