@@ -202,6 +202,75 @@ kbd {
   border-radius: 3px;
 }
 
+/* 모바일 터치 조작 (기본 숨김) */
+.touch-controls {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  width: 100%;
+  max-width: calc(
+    var(--cell-size) * var(--board-cols) + var(--grid-gap) * (var(--board-cols) - 1)
+  );
+  touch-action: manipulation;
+}
+
+.touch-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.touch-btn {
+  flex: 1;
+  min-height: 52px;
+  padding: 12px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  background: #0f3460;
+  border: 2px solid #533483;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.touch-btn:active:not(:disabled) {
+  background: #533483;
+  transform: scale(0.97);
+}
+
+.touch-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.touch-btn-rotate {
+  flex: 1.2;
+  background: #16213e;
+}
+
+.touch-btn-drop {
+  flex: 2;
+  font-size: 1rem;
+  background: #e94560;
+  border-color: #ff6b6b;
+}
+
+.touch-btn-drop:active:not(:disabled) {
+  background: #ff6b6b;
+}
+
+.touch-hint {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #a0a0b0;
+  text-align: center;
+}
+
 /* 모바일: 세로 배치 + 화면에 맞게 셀 크기 조절 */
 @media (max-width: 768px) {
   body {
@@ -233,15 +302,19 @@ kbd {
     );
   }
 
-  .controls-list li {
-    font-size: 0.85rem;
+  .controls-desktop {
+    display: none;
+  }
+
+  .touch-controls {
+    display: flex;
   }
 
   :root {
     --cell-size: min(
       30px,
       calc((100vw - 32px - 22px - var(--grid-gap) * (var(--board-cols) - 1)) / var(--board-cols)),
-      calc((100dvh - 340px - var(--grid-gap) * (var(--board-rows) - 1)) / var(--board-rows))
+      calc((100dvh - 420px - var(--grid-gap) * (var(--board-rows) - 1)) / var(--board-rows))
     );
   }
 }
@@ -271,7 +344,22 @@ kbd {
     font-size: 2rem;
   }
 
-  .controls-panel {
+  .controls-desktop {
+    display: none;
+  }
+
+  .touch-controls {
+    display: flex;
+    margin-top: 8px;
+    max-width: 180px;
+  }
+
+  .touch-btn {
+    min-height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .touch-hint {
     display: none;
   }
 }
